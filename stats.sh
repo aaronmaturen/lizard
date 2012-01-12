@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 USAGE="Usage: -p [password] -u [username]."
 
 while getopts ":p:u:" OPTIONS; do
