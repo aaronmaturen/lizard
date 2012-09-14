@@ -38,7 +38,7 @@ function get_processes(){
 }
 
 function kill_stale_connections(){
-	echo "show processlist;" | mysql -h $host -u $user $password | awk "/$murder.*Sleep/"'{if ($6 > 5) print "kill "$1";"}' | mysql -h $host -u $user $password
+	echo "show processlist;" | mysql -h $host -u $user $password | awk "/$murder.*Sleep/"'{if ($6 > 600) print "kill "$1";"}' | mysql -h $host -u $user $password
 }
 
 #get number of queries to start with
