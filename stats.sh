@@ -1,5 +1,5 @@
 #!/bin/bash
-USAGE="Usage: -h[host] -u [username] -p [password]."
+USAGE="Usage: -h[host] -u [username] -p [password] -k[user to check for staleness] -t[time for each loop]."
 
 host="localhost"
 time_to_live=600
