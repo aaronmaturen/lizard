@@ -1,9 +1,9 @@
-#!/usr/bin/bash
+#!/bin/bash
 USAGE="Usage: -h[host] -u [username] -p [password]."
 
 while getopts ":p:u:h:" OPTIONS; do
 	case $OPTIONS in
-		p ) password=$OPTARG;;
+		p ) password="-p"$OPTARG;;
 		u ) user=$OPTARG;;
 		h ) host=$OPTARG;;
 		\? ) echo $USAGE
@@ -11,19 +11,21 @@ while getopts ":p:u:h:" OPTIONS; do
 		* ) echo $usage
 			exit 1;;
 	esac
-	echo "logging into MySQL host " $host" with username" $user", and password" $password
 done
 
+echo "logging into MySQL host " $host" with username" $user
+
+
 function get_number_of_queries(){
-	echo "show status like 'Queries';" | mysql -h $host -u $user -p$password | sed "s/[^0-9]//g"
+	echo "show status like 'Queries';" | mysql -h $host -u $user $password | sed "s/[^0-9]//g"
 }
 
 function get_number_of_connections(){
-	echo "show status like 'Connections';" | mysql -h $host -u $user -p$password | sed "s/[^0-9]//g"
+	echo "show status like 'Connections';" | mysql -h $host -u $user $password | sed "s/[^0-9]//g"
 }
 
 function get_uptime(){
-	echo "show status like 'Uptime';" | mysql -h $host -u $user -p$password| sed "s/[^0-9]//g"
+	echo "show status like 'Uptime';" | mysql -h $host -u $user $password| sed "s/[^0-9]//g"
 }
 #get number of queries to start with
 initialquery=$(get_number_of_queries)
